@@ -49,22 +49,22 @@ def train_once(campus, start, goal, args, seed):
     q_values = {}  # A fresh table for every seed, task, and condition.
     training_records = []
     for episode in range(1, args.episodes + 1):
-        state = environment.reset()
+        state = environment.reset() # start with a blank environment.
         total_reward = 0
         terminal = False
         for step in range(1, args.max_steps + 1):
-            action = agents.epsilon_greedy(q_values, state, ACTIONS,
+            action = agents.epsilon_greedy(q_values, state, ACTIONS, # choose an action using epsilon-greedy exploration
                                           args.epsilon, action_rng)
-            next_state, reward, terminal = environment.step(action)
-            agents.q_learning_update(q_values, state, action, reward,
+            next_state, reward, terminal = environment.step(action) # update the environment variables.
+            agents.q_learning_update(q_values, state, action, reward, # call learning update so that the agent learns based on the action taken.
                                      next_state, ACTIONS, args.alpha,
                                      args.gamma, terminal)
-            total_reward += reward
+            total_reward += reward # update reward.
             state = next_state
             if terminal:
                 break
 
-        training_records.append({"episode": episode, "steps": step,
+        training_records.append({"episode": episode, "steps": step, # log the results to the training record.
                                  "return": total_reward,
                                  "success": int(terminal),
                                  "truncated": int(not terminal)})

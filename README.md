@@ -1,6 +1,6 @@
-# Eagle Delivery: Project 1 starter
+# Eagle Delivery: Project 1
 
-This is our project 1 that focuses on search and reinforcement learning. Edit this readme file with your own project introduction and run commands for your GitHub commits.
+This project simulates a delivery system where a navigatable map is given to the program and various tasks are able to be run on the map. Search algorithms BFS and A* are implemented and can be compared on each map provided. In addition a learning agent is implemented to discover an optimal path of delivery based only on learning about it's environment through episodes rather than using a search algorithm.
 
 ## Requirements
 
@@ -44,3 +44,20 @@ python3 -m unittest tests.test_student.LearningTests -v
 python3 -m unittest discover -v
 python3 run_project.py train --start S --goal W --output results/baseline_SW
 ```
+
+## What was implemented
+
+Functions in agents.py were implemented such as astar and epsilon_greedy algorithms.
+
+## Runs and testing
+
+Commands to train the agent such as
+`python3 run_project.py train --start L --goal D --output results/baseline_LD`
+were run to gather information on the agent for different paths.
+
+Results can be summarized with `python3 summarize_results.py results/baseline_SW` and examined to understand how the agent learned.
+
+Custom maps can be created in the `maps` folder and can be used in runs like
+`python3 run_project.py train --map maps/my_campus.txt --alpha 0.3 --output results/custom_a03`
+
+A detailed summary in the form of a report is available at `Report.docx`
